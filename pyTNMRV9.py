@@ -14,7 +14,8 @@ Michael Malone mwmalone@gmail.com
 """
 
 """CHANGE LOG
-2022-7-22 setTable and getTable added - ARA
+2025-09-13 Better logging and folder creation
+2022-07-22 setTable and getTable added - ARA
 2020-12-10 SpyctraV5 Overhaul
 2018-04-01 Overhaul
 """
@@ -361,3 +362,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
