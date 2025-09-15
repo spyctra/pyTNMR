@@ -27,7 +27,7 @@ import ntpath
 import shutil
 
 import sys
-sys.path.append('C://code//spyctraV5//')
+sys.path.append('C://code//spyctra_V6//')
 
 from spyctra import spyctra
 from TNT import read as readTNT
@@ -42,6 +42,8 @@ class TNMR(object):
         Args:
             path: The default directory all data and 
                 associtated log files will be stored in.
+            unique: if False will overwrite data in path
+                    if True will append unique number to path
             *running: binary flag determining whether
                 sequences are actually run. Useful for
                 debugging sequences
@@ -67,7 +69,6 @@ class TNMR(object):
         self.printSelf()
 
         input('Ready? ')
-
 
 
     def copySource(self):
@@ -362,4 +363,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
