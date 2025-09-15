@@ -1,5 +1,5 @@
 import sys
-sys.path.append('c:/code/spyctraV5')
+sys.path.append('c:/code/spyctra_v6')
 
 from pyTNMRV9 import TNMR
 from fitlib import fit
