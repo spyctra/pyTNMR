@@ -14,6 +14,8 @@ Michael Malone mwmalone@gmail.com
 """
 
 """CHANGE LOG
+
+2025-09-18 The great _ reformat
 2025-09-13 Better logging and folder creation
 2022-07-22 setTable and getTable added - ARA
 2020-12-10 SpyctraV5 Overhaul
