@@ -1,7 +1,7 @@
 import sys
 sys.path.append('c:/code/spyctra_v6')
 
-from pyTNMRV9 import TNMR
+from pyTNMR_V10 import TNMR
 from fitlib import fit
 
 from time import sleep
@@ -79,7 +79,6 @@ def main():
 
         b = a.get_spyctra()
         f1 = get_CPMG_freq(b)
-        a.set_param('Observe Freq.', f1)   
         
         a.open('FID_BASE')
         a.set_param('Observe Freq.', f1)   
