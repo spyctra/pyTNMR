@@ -18,19 +18,19 @@ def compExp(x, amp, df, phi):
     return amp*e**(1j*(-2*pi*df*x + phi))
     
     
-def getCPMGFreq(s0):
+def get_CPMG_freq(s0):
     s = s0.copy()
-    s.newCount(2048)
+    s.new_count(2048)
     s.decimate()
     
     g = s.copy()
     g.resize(2048)
     g.fft()
     
-    df = g.findOffRes()
-    phi = g.findPhase()
+    df = g.find_df()
+    phi = g.find_phi()
 
-    s.leftShift(1)
+    s.shift(1)
     s.resize(37)
     
     p,r = fit(compExp, s.x, s.data[0],
@@ -56,35 +56,35 @@ def main():
     a = TNMR('data', unique=False, running=1)
 
     a.open(f'{a.root}CPMG_Bp_NMR_v3')
-    a.setParam('Scans 1D', 1)   
-    a.setParam('Last Delay', '1s')   
-    a.setParam('Bp', BpOn)   
-    a.setParam('Observe Freq.', f1)   
-    a.saveAs('CPMG_BASE')
+    a.set_param('Scans 1D', 1)   
+    a.set_param('Last Delay', '1s')   
+    a.set_param('Bp', BpOn)   
+    a.set_param('Observe Freq.', f1)   
+    a.save_as('CPMG_BASE')
 
     a.open(f'{a.root}FID_Bp_NMR_v3')
-    a.setParam('Scans 1D', 1)   
-    a.setParam('Last Delay', '1s')   
-    a.setParam('Bp', BpOn)   
-    a.setParam('Observe Freq.', f1)   
-    a.saveAs('FID_BASE')
+    a.set_param('Scans 1D', 1)   
+    a.set_param('Last Delay', '1s')   
+    a.set_param('Bp', BpOn)   
+    a.set_param('Observe Freq.', f1)   
+    a.save_as('FID_BASE')
     
     j0 = 0
     
     for j in range(j0, trials):        
         a.open('CPMG_BASE')
         a.zg()
-        a.saveAs(f'CPMG_BASE_{j}')
+        a.save_as(f'CPMG_BASE_{j}')
         a.sleep(1)
 
-        b = a.getSpyctra()
-        f1 = getCPMGFreq(b)
-        a.setParam('Observe Freq.', f1)   
+        b = a.get_spyctra()
+        f1 = get_CPMG_freq(b)
+        a.set_param('Observe Freq.', f1)   
         
         a.open('FID_BASE')
-        a.setParam('Observe Freq.', f1)   
+        a.set_param('Observe Freq.', f1)   
         a.zg()
-        a.saveAs(f'FID_{j}')
+        a.save_as(f'FID_{j}')
         a.sleep(8)
 
 
