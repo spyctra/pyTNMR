@@ -247,7 +247,7 @@ class TNMR(object):
         total_scans = scans_1D*points_2D
 
         if self.tnmr.GetNMRParameter('Points 3D')*self.tnmr.GetNMRParameter('Points 4D') > 1:
-            raise ValueError('ERROR: What is wrong with you? Don\'t use 3D and 4D tables')
+            raise ValueError('ERROR: What is wrong with you? The whole point of pyTNMR is to avoid 3D and 4D tables')
 
         while True:
             if self.running == 1:
