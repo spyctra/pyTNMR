@@ -51,14 +51,14 @@ class TNMR(object):
         self.unique = unique
         self.running = running
 
-        self.root = os.getcwd() + '\\' 
+        self.root = os.getcwd() + '\\'
         self.exp_path = self.get_exp_path(path.replace('/', '\\'))
         suffix = self.copy_source()
 
         self.tnmr = win32com.client.Dispatch("NTNMR.Application")
         #print(dir(self.tnmr))
         self.current = self.tnmr.GetActiveDocPath
-        
+
         self.pyTNMR_log_file = self.init_log('pyTNMR', suffix)
         self.exp_log_file = self.init_log('exp', suffix)
 
@@ -101,12 +101,12 @@ class TNMR(object):
         print(f'{souce_destination = }')
 
         shutil.copyfile(source, souce_destination)
-        
+
         if c > 0:
             suffix = f'-v{c}'
         else:
             suffix = ''
-        
+
         return suffix
 
 
@@ -121,19 +121,19 @@ class TNMR(object):
             while os.path.isdir(path0[:-1] + f'_{c}\\'):
                 c += 1
 
-            exp_path = path0[:-1] + f'_{c}\\'          
+            exp_path = path0[:-1] + f'_{c}\\'
             print(f'Making experiment directory {exp_path}')
             os.makedirs(exp_path)
-            
+
             return exp_path
         else:
             if os.path.isdir(path0):
                 print(f'{path0 = } exists')
             else:
                 print(f'Making experiment directory {path0}')
-                
+
                 os.makedirs(path0)
-            
+
             return path0
 
 
@@ -150,13 +150,13 @@ class TNMR(object):
 
         return value
 
-    
+
     def init_log(self, log_name, suffix):
         log_file = f'{self.exp_path}{log_name}_log{suffix}.txt'
-        
+
         with open(f'{log_file}', 'w') as a:
             a.write('')
-    
+
         return log_file
 
 
@@ -178,7 +178,7 @@ class TNMR(object):
             filename = self.root + self.exp_path + filename
 
         filename = filename.replace('/','\\')
-        
+
         return filename
 
 
@@ -301,7 +301,7 @@ class TNMR(object):
             sleep(t)
 
 
-    def zg(self, *manual_check):
+    def zg(self, manual_check=False):
         """ZeroAndGo
         Runs the active TNMR file checking every second for completion
 
@@ -359,7 +359,7 @@ class TNMR(object):
             check = input('Happy? ')
 
             if check in ['n','N','no','No']:
-                self.zg(manual_check[0])
+                self.zg(True)
 
 
 class TNMRError(Exception):
@@ -373,14 +373,14 @@ class TNMRError(Exception):
 def test_suite():
     a = TNMR('data', False, 0)
     a.open(f'{a.root}RO')
-    
+
     for rec_gain in [i+60 for i in range(10)]:
         a.log(f'{rec_gain = }')
         a.set_param('Receiver Gain', rec_gain)
         a.zg()
         a.save_as(f'RO_RecGain{rec_gain}')
-        
-        
+
+
 def main():
     test_suite()
 
