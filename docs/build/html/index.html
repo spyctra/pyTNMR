@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyTNMR documentation &#8212; pyTNMR 10 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=42145d5c"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="pytnmr-documentation">
+<h1>pyTNMR documentation<a class="headerlink" href="#pytnmr-documentation" title="Link to this heading">¶</a></h1>
+<p>pyTNMR interfaces Python with Tecmag Inc.’s TNMR software to provide a significant amount of automation. When used in conjunction with Spyctra (<a class="reference external" href="https://github.com/spyctra/spyctra">https://github.com/spyctra/spyctra</a>), active feedback of experimental results can be obtained to continuously audit data as it is acquired, change the observation frequency of a measurement, automatically repeat measurements, or actively interface with other experimental equipment, to name but a few.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyTNMR.__init__">
+<span class="sig-prename descclassname"><span class="pre">pyTNMR.</span></span><span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">running</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTNMR.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize a pyTNMR object. Creates a subdirectory in the current working directory with name <em>path</em>. Copies the source code of the script into this directory and creates unique pyTNMR and experimental log files to help track issues or relevant variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – The name of the experimental directory, relative to the current working directory, where the .tnt files, logs, and source code are stored.</p></li>
+<li><p><strong>unique</strong> (<em>int</em><em>[</em><em>0 1</em><em>] or </em><em>bool</em>) – A flag indicating if the experimental directory must be unique. If unique then a numerical index will be appended to <em>path</em> each time the code is rerun.</p></li>
+<li><p><strong>running</strong> (<em>int</em><em>[</em><em>0</em><em>, </em><em>1</em><em>] or </em><em>bool.</em>) – A flag indicating if the sequences should actually be run (i.e. ZG performed). This can help with debugging longer, more complicated scripts.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyTNMR.get_param">
+<span class="sig-prename descclassname"><span class="pre">pyTNMR.</span></span><span class="sig-name descname"><span class="pre">get_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTNMR.get_param" title="Link to this definition">¶</a></dt>
+<dd><p>Return the value of the desired parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>param</strong> (<em>str</em>) – The parameter whose value is to be returned.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyTNMR.get_table">
+<span class="sig-prename descclassname"><span class="pre">pyTNMR.</span></span><span class="sig-name descname"><span class="pre">get_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTNMR.get_table" title="Link to this definition">¶</a></dt>
+<dd><p>Return the values of the desired table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>table</strong> (<em>str</em>) – The table whose value is to be returned.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyTNMR.log">
+<span class="sig-prename descclassname"><span class="pre">pyTNMR.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTNMR.log" title="Link to this definition">¶</a></dt>
+<dd><p>Print the desired line to the experimental log file in the experiment directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>line</strong> (<em>str</em>) – The string being printed to the experimental log.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyTNMR.open">
+<span class="sig-prename descclassname"><span class="pre">pyTNMR.</span></span><span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTNMR.open" title="Link to this definition">¶</a></dt>
+<dd><p>Open the requested tnt file. Will check experimental directory unless a more detailed path to the target .tnt file is specified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – The path of the file to open.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyTNMR.read">
+<span class="sig-prename descclassname"><span class="pre">pyTNMR.</span></span><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTNMR.read" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a spyctra object from the target .tnt file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – The path of the file to generate a .tnt from. Path is relative to experimental directory</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyTNMR.reset">
+<span class="sig-prename descclassname"><span class="pre">pyTNMR.</span></span><span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTNMR.reset" title="Link to this definition">¶</a></dt>
+<dd><p>Resets the TNRM hardware (equivalent to Hammer button).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyTNMR.save_as">
+<span class="sig-prename descclassname"><span class="pre">pyTNMR.</span></span><span class="sig-name descname"><span class="pre">save_as</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTNMR.save_as" title="Link to this definition">¶</a></dt>
+<dd><p>Save the current active file as <em>filename</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – The name of the new .tnt file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyTNMR.set_param">
+<span class="sig-prename descclassname"><span class="pre">pyTNMR.</span></span><span class="sig-name descname"><span class="pre">set_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTNMR.set_param" title="Link to this definition">¶</a></dt>
+<dd><p>Set the sequence parameter to the desired <em>value</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>param</strong> (<em>str</em>) – Which parameter to change.</p></li>
+<li><p><strong>value</strong> – The new value of the target parameter.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyTNMR.set_table">
+<span class="sig-prename descclassname"><span class="pre">pyTNMR.</span></span><span class="sig-name descname"><span class="pre">set_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTNMR.set_table" title="Link to this definition">¶</a></dt>
+<dd><p>Set the sequence table to the desired <em>value</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table</strong> (<em>str</em>) – Which parameter to change.</p></li>
+<li><p><strong>value</strong> – The new value of the target parameter.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyTNMR.sleep">
+<span class="sig-prename descclassname"><span class="pre">pyTNMR.</span></span><span class="sig-name descname"><span class="pre">sleep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTNMR.sleep" title="Link to this definition">¶</a></dt>
+<dd><p>Stop the sequence for <em>t</em> seconds. Only works if <em>self.running</em> is True to help with debugging scripts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<em>numeric</em>) – The amount of seconds to pause the script.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyTNMR.zg">
+<span class="sig-prename descclassname"><span class="pre">pyTNMR.</span></span><span class="sig-name descname"><span class="pre">zg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">manual_check</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTNMR.zg" title="Link to this definition">¶</a></dt>
+<dd><p>Run the sequence (equivalent to ZG button). Only works if <em>self.running</em> is True to help with debugging scripts. Will estimate time to completion and check that progress is as expected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>manual_check</strong> (<em>int</em><em>[</em><em>0</em><em>,</em><em>1</em><em>] or </em><em>bool</em>) – Flag to query user after each complete ZG to redo the experiment. Useful when manually interacting with experiment.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">pyTNMR</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Michael W. Malone.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
