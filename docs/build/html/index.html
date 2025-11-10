@@ -33,11 +33,11 @@
             
   <section id="pytnmr-documentation">
 <h1>pyTNMR documentation<a class="headerlink" href="#pytnmr-documentation" title="Link to this heading">¶</a></h1>
-<p>pyTNMR interfaces Python with Tecmag Inc.’s TNMR software and provides a significant amount of automation. When used in conjunction with Spyctra (<a class="reference external" href="https://github.com/spyctra/spyctra">https://github.com/spyctra/spyctra</a>), active feedback of experimental results can be obtained to continuously audit data as it is acquired, change the observation frequency of a measurement, automatically repeat measurements, or actively interface with other experimental equipment, to name but a few.</p>
+<p>pyTNMR interfaces Python with Tecmag Inc.’s TNMR software to provide a significant amount of automation. When used in conjunction with Spyctra (<a class="reference external" href="https://github.com/spyctra/spyctra">https://github.com/spyctra/spyctra</a>), active feedback of experimental results can be obtained to continuously audit data as it is acquired, change the observation frequency of a measurement, automatically repeat measurements, or actively interface with other experimental equipment, to name but a few.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pyTNMR.__init__">
 <span class="sig-prename descclassname"><span class="pre">pyTNMR.</span></span><span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">running</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTNMR.__init__" title="Link to this definition">¶</a></dt>
-<dd><p>Initialize a pyTNMR object. Creates an subdirectory of the current working directory with name <em>path</em>. Copies the source code of the script into this directory and  creates unique pyTNMR and experimental log files to help track issues or relevant variables.</p>
+<dd><p>Initialize a pyTNMR object. Creates a subdirectory in the current working directory with name <em>path</em>. Copies the source code of the script into this directory and creates unique pyTNMR and experimental log files to help track issues or relevant variables.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -77,7 +77,7 @@
 <dd><p>Print the desired line to the experimental log file in the experiment directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>line</strong> (<em>str</em>) – The table whose value is to be returned.</p>
+<dd class="field-odd"><p><strong>line</strong> (<em>str</em>) – The string being printed to the experimental log.</p>
 </dd>
 </dl>
 </dd></dl>

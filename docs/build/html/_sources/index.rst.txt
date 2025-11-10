@@ -6,12 +6,12 @@
 pyTNMR documentation
 ====================
 
-pyTNMR interfaces Python with Tecmag Inc.'s TNMR software and provides a significant amount of automation. When used in conjunction with Spyctra (https://github.com/spyctra/spyctra), active feedback of experimental results can be obtained to continuously audit data as it is acquired, change the observation frequency of a measurement, automatically repeat measurements, or actively interface with other experimental equipment, to name but a few.
+pyTNMR interfaces Python with Tecmag Inc.'s TNMR software to provide a significant amount of automation. When used in conjunction with Spyctra (https://github.com/spyctra/spyctra), active feedback of experimental results can be obtained to continuously audit data as it is acquired, change the observation frequency of a measurement, automatically repeat measurements, or actively interface with other experimental equipment, to name but a few.
 
 
 .. py:function:: pyTNMR.__init__(self, path, unique=True, running=1)
 
-    Initialize a pyTNMR object. Creates an subdirectory of the current working directory with name *path*. Copies the source code of the script into this directory and  creates unique pyTNMR and experimental log files to help track issues or relevant variables.
+    Initialize a pyTNMR object. Creates a subdirectory in the current working directory with name *path*. Copies the source code of the script into this directory and creates unique pyTNMR and experimental log files to help track issues or relevant variables.
 
     :param path: The name of the experimental directory, relative to the current working directory, where the .tnt files, logs, and source code are stored.
     :type path: str
@@ -41,7 +41,7 @@ pyTNMR interfaces Python with Tecmag Inc.'s TNMR software and provides a signifi
 
     Print the desired line to the experimental log file in the experiment directory.
 
-    :param line: The table whose value is to be returned.
+    :param line: The string being printed to the experimental log.
     :type line: str
 
 
