@@ -12,6 +12,7 @@ Michael Malone mwmalone@gmail.com
 
 """CHANGE LOG
 
+2025-12-24 Better file name mangement
 2025-10-22 actual debugging
 2025-09-18 The great _ reformat
 2025-09-13 Better logging and folder creation
@@ -26,11 +27,17 @@ import win32com.client
 import ntpath
 import shutil
 
-import sys
-sys.path.append('C://code//spyctra_V6//')
+try:
+    import sys
+    sys.path.append('C:/code//spyctra/')
 
-from spyctra import spyctra
-from TNT import read as read_TNT
+    from spyctra import spyctra
+    from TNT import read as read_TNT
+except:
+    print('WARNING: Could not load spyctra')
+
+
+debug = 1
 
 class TNMR(object):
     def __init__(self, path, unique=True, running=1):
@@ -40,8 +47,7 @@ class TNMR(object):
         open .tnt file when initiated
 
         Args:
-            path: The default directory all data and
-                associtated log files will be stored in.
+            path: Defines the experimental data path relative to current working directory.
             unique: if False will overwrite data in path
                     if True will append unique number to path
             *running: binary flag determining whether
@@ -52,7 +58,7 @@ class TNMR(object):
         self.running = running
 
         self.root = os.getcwd() + '\\' 
-        self.exp_path = self.get_exp_path(path.replace('/', '\\'))
+        self.exp_path = self.root + self.get_exp_path(path.replace('/', '\\'))
         suffix = self.copy_source()
 
         self.tnmr = win32com.client.Dispatch("NTNMR.Application")
@@ -174,8 +180,6 @@ class TNMR(object):
     def name_check(self, filename):
         if filename[-4:] != '.tnt':
             filename += '.tnt'
-        if filename.find('/')<0 and filename.find('\\')<0:
-            filename = self.root + self.exp_path + filename
 
         filename = filename.replace('/','\\')
         
@@ -202,6 +206,7 @@ class TNMR(object):
             self.close(self.current)
             self.current = self.tnmr.GetActiveDocPath
 
+            #check that it worked
             if filename != self.tnmr.GetActiveDocPath:
                 self.pyTNMR_log('    Could not open')
                 self.pyTNMR_log(filename)
@@ -235,6 +240,7 @@ class TNMR(object):
         print()
         print(f'{self.root = }')
         print(f'{self.exp_path = }')
+        print(f'{self.current = }')
         print(f'{self.running = }')
         print(f'{self.unique = }')
 
@@ -341,16 +347,16 @@ class TNMR(object):
                 sleep_inc = max(expected_time/9, 1)
 
                 while not done:
-                    sleep(sleepInc) #evervy 9th of data collect
+                    sleep(sleep_inc) #every 9th of data collect
                     done = self.tnmr.CheckAcquisition
                     act_points_1D = int(self.tnmr.GetNMRParameter('Actual Scans 1D'))
                     act_points_2D = int(self.tnmr.GetNMRParameter('Actual Points 2D'))
-                    percent_done = 100*(act_points_1D + (act_points_2D-1)*scans1D)/total_scans
+                    percent_done = 100*(act_points_1D + (act_points_2D - 1)*scans_1D)/total_scans
 
                     if (time()-t0)/expected_time > 2*percent_done or (percent_done==0 and time()-t0>20):
                         print(f'Collect failed?')
 
-                    if percent_done>c/10:
+                    if percent_done>c/10 and (act_points_1D != 1 and scans_1D !=1):
                         print(f'{percent_done = :.1f} %')
 
                         c = percent_done//10+1
@@ -374,20 +380,21 @@ class TNMRError(Exception):
 
 
 def test_suite():
-    a = TNMR('data', False, 0)
-    a.open(f'{a.root}RO')
+    import numpy as np
     
-    for rec_gain in [i+60 for i in range(10)]:
-        a.log(f'{rec_gain = }')
-        a.set_param('Receiver Gain', rec_gain)
+    a = TNMR('nutation', False, 1)
+    
+    a.open(f'{a.root}FID_B0_SpInit_v0')
+    a.save_as(f'{a.exp_path}BASE')
+    
+    pws = 2 + 2*np.arange(10)
+    
+    for i, pw in enumerate(pws):
+        a.open(f'{a.exp_path}BASE')
+        a.set_param('pw0', f'{pw}u')
         a.zg()
-        
-        if rec_gain == 60:
-            b = a.read()
-        
-        print(b.meta)
-        
-        a.save_as(f'RO_RecGain{rec_gain}')
+        a.save_as(f'{a.exp_path}FID_{i}')
+    
         
         
 def main():
